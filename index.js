@@ -1,4 +1,3 @@
-const proyectoModelo = require('./infraestructura/conexionDB.js')
 require('./infraestructura/conexionDB')
 const express = require ('express')
 const {ApolloServer} = require ('apollo-server-express')
