@@ -1,7 +1,10 @@
 const {Schema, model} = require('mongoose')
 
 const proyecto = new Schema ({
-    Id_proyecto: Number,
+    Id_proyecto: {
+        type: String,
+        unique: true
+    },
     nombre: String,
     objetivos_generales: String,
     objetivos_especificos: String,
@@ -16,13 +19,17 @@ const proyecto = new Schema ({
     },
     documento: Number,
     lider: String,
+    estado_creacion: {
+        type: String,
+        default: "No aprobado"
+    },
     estado_proyecto: {
-        type: Boolean,
-        default: true
+        type: String,
+        default: "Inactivo"
     },
     fase: {
-        type: Boolean,
-        default: true
+        type: String,
+        default: "Nula"
     }
 })
 module.exports = model('proyectos', proyecto)

@@ -63,7 +63,16 @@ const listUsuarios=[
         return User.updateOne({identificacion:args.identificacion}, {estado:"Autorizado"})
           .then(u => "Se realizó la activación del usuario.")
           .catch(err => "Fallo la activación del usuario.");
+      },
+      aprobarcrearProyecto: (parent, args, context, info) => {
+        return proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_creacion:"Aprobado"})
+          .then(u => "Se realizó la aprobación para creación del proyecto")
+          .catch(err => "Fallo la aprobación para creación del proyecto");
       }
+      /*aprobarcrearProyecto: async (parent, args, context, info) => {
+        const resp = await proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_creacion:"Aprobado"})
+        console.log(resp);
+      }*/
     }
   }
   module.exports = resolvers

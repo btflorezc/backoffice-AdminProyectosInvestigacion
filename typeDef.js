@@ -25,6 +25,7 @@ const typeDefs = gql`
         fecha_terminacion: String
         documento: Int
         lider: String
+        estado_creacion: String
         estado_proyecto: String
         fase: String
     }
@@ -47,6 +48,7 @@ const typeDefs = gql`
     type Mutation{
         createUser(user:UserInput):String
         activeUser(identificacion:Int):String
+        aprobarcrearProyecto(Id_proyecto:String): String
     }
 
 `
