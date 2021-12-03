@@ -53,9 +53,14 @@ const listUsuarios=[
           .then(u => "Usuario ha sido creado.")
           .catch(err => "Fallo la creación del usuario.");
       },
-      activeUser: async (parent, args, context, info) => {
+      /*activeUser: async (parent, args, context, info) => {
         const resp = await User.updateOne({identificacion:args.identificacion}, {estado:"Autorizado"});
         console.log(resp);
+      }*/
+      activeUser: (parent, args, context, info) => {
+        return User.updateOne({identificacion:args.identificacion}, {estado:"Autorizado"})
+          .then(u => "Se realizó la activación del usuario.")
+          .catch(err => "Fallo la activación del usuario.");
       }
     }
   }
