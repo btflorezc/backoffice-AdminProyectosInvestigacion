@@ -1,6 +1,6 @@
 const proyecto = require('./modelo/proyectosModelo')
 const User = require('./modelo/usuariosModelo')
-var aes256 = require('aes256');
+var aes256 = require('aes256'); /* Para encriptar contraseñas se instala npm install aes256 */
 
 const listUsuarios=[
     {
@@ -52,10 +52,11 @@ const listUsuarios=[
         return nuevoUsuario.save()
           .then(u => "Usuario ha sido creado.")
           .catch(err => "Fallo la creación del usuario.");
+      },
+      activeUser: async (parent, args, context, info) => {
+        const resp = await User.updateOne({identificacion:args.identificacion}, {estado:"Autorizado"});
+        console.log(resp);
       }
     }
-
-/* Para encriptar contraseñas se instala npm install aes256 */
-
   }
   module.exports = resolvers
