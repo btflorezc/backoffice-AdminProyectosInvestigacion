@@ -30,10 +30,12 @@ const listUsuarios=[
 
   const resolvers = {
     Query:{
-      usuarios: () => listUsuarios,
-      usuario: (parent, args, context, info) => {
+      /*usuarios: () => listUsuarios,
+      /*usuario: (parent, args, context, info) => {
         return listUsuarios.find( user=> user.identificacion == args.identificacion)
-        },
+        },*/
+      
+      usuarios: async () => await User.find({}),
       proyectos: async () => await proyecto.find({}),
       getProyecto: async (parent, args, context, info) => await proyecto.findOne({nombre: args.nombre})
       },
