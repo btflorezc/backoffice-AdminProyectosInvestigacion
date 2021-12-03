@@ -49,8 +49,9 @@ const listUsuarios=[
         const nuevoUsuario = new User(args.user);
         const encryptedPlainText = aes256.encrypt(key, contrasena);
         nuevoUsuario.contrasena = encryptedPlainText;
-        nuevoUsuario.save();
-        return "Usuario ha sido creado."
+        return nuevoUsuario.save()
+          .then(u => "Usuario ha sido creado.")
+          .catch(err => "Fallo la creación del usuario.");
       }
     }
 
