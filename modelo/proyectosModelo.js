@@ -30,6 +30,23 @@ const proyecto = new Schema ({
     fase: {
         type: String,
         default: "Nula"
-    }
+    },
+    inscripciones: [{
+        id_inscripcion:{
+            type: String,
+            unique: true}, 
+        id_estudiante: {
+            type: String,
+            unique: true},
+        estado: {
+            type: String,
+            default: "Pendiente"},
+        fecha_ingreso: {
+            type: Date,
+            default: null},
+        fecha_egreso: {
+            type: Date,
+            default: null}
+    }]
 })
 module.exports = model('proyectos', proyecto)

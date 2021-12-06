@@ -55,6 +55,12 @@ const listUsuarios=[
           .then(u => "Usuario ha sido creado.")
           .catch(err => "Fallo la creación del usuario.");
       },
+      createProyecto:(parent, args, context, info) => {
+        const { Id_proyecto, nombre, objetivos_generales, objetivos_especificos, presupuesto, fecha_inicio, fecha_terminacion, documento, lider } = args.proyecto;
+        const nuevoProyecto = new proyecto(args.proyecto);
+        nuevoProyecto.save();
+        return "Proyecto ha sido creado."
+      },
       /*activeUser: async (parent, args, context, info) => {
         const resp = await User.updateOne({identificacion:args.identificacion}, {estado:"Autorizado"});
         console.log(resp);
@@ -66,13 +72,29 @@ const listUsuarios=[
       },
       aprobarcrearProyecto: (parent, args, context, info) => {
         return proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_creacion:"Aprobado"})
-          .then(u => "Se realizó la aprobación para creación del proyecto")
-          .catch(err => "Fallo la aprobación para creación del proyecto");
-      }
+            .then(u => "Se realizó la aprobación para creación del proyecto")
+            .catch(err => "Fallo la aprobación para creación del proyecto");
+      },
       /*aprobarcrearProyecto: async (parent, args, context, info) => {
         const resp = await proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_creacion:"Aprobado"})
         console.log(resp);
       }*/
+      activarProyecto: (parent, args, context, info) => {
+        return proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_proyecto:"Activar"})
+            .then(u => "Se realizó la activación del proyecto")
+            .catch(err => "Fallo la activación del proyecto");
+      },
+      inactivarProyecto: (parent, args, context, info) => {
+        return proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {estado_proyecto:"Inactivar"})
+            .then(u => "Se realizó la inactivación del proyecto")
+            .catch(err => "Fallo la inactivación del proyecto");
+      },
+      cambiarfaseProyecto: (parent, args, context, info) => {
+        return proyecto.updateOne({Id_proyecto:args.Id_proyecto}, {fase:"Terminado"})
+            .then(u => "Se realizo el cambio de fase del proyecto, de “En desarrollo” a “Terminado”.")
+            .catch(err => "Fallo el cambio de fase del proyecto, de “En desarrollo” a “Terminado”.");
+      }
     }
   }
+  
   module.exports = resolvers
